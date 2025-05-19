@@ -1,5 +1,5 @@
 import { Tabs } from "antd";
-import Reports from "./Reports";
+import Dashboard from "../components/Dashboard";
 
 const { TabPane } = Tabs;
 
@@ -8,7 +8,7 @@ const LayoutComponents = () => {
     <div style={{ height: "100vh", width: "100vw", overflow: "hidden" }}>
       <Tabs defaultActiveKey="1" type="line" style={{ height: "100%" }}>
         <TabPane tab="Dashboard" key="1">
-          <Reports />
+          <Dashboard />
         </TabPane>
         <TabPane tab="Users" key="2">
           <div style={{ height: "100%", backgroundColor: "#e6f7ff" }}>
