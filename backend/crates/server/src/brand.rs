@@ -1,12 +1,12 @@
-use crate::clickhouse::{client, QueryBuilder};
-use async_graphql::{SimpleObject, ID, OutputType};
+use crate::clickhouse::{QueryBuilder, client};
+use crate::graphql::GlobalID;
+use anyhow::Result;
+use async_graphql::{ID, OutputType, SimpleObject};
+use clickhouse::Client;
 use entity::brand;
 use sea_query::Order;
 use serde::{Deserialize, Serialize};
 use tracing::debug;
-use crate::graphql::GlobalID;
-use clickhouse::Client;
-use anyhow::Result;
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, SimpleObject)]
 pub struct Brand {
@@ -20,7 +20,7 @@ pub struct Brand {
 impl Brand {
     pub(crate) async fn fetch_all(db: &Client) -> Result<Vec<Brand>> {
         debug!("fetching all brands");
-    
+
         let query = sea_query::Query::select()
             .columns([
                 brand::Column::Id,
@@ -32,10 +32,10 @@ impl Brand {
             .from(brand::Entity)
             .order_by(brand::Column::Name, Order::Asc)
             .take();
-    
+
         let raw_rows: Vec<(i64, String, String, bool, bool)> =
             QueryBuilder::new(&client()?, &query).fetch_all().await?;
-    
+
         let brands = raw_rows
             .into_iter()
             .map(|(id, name, url_slug, private_label, status)| brand::Model {
@@ -47,18 +47,18 @@ impl Brand {
             })
             .map(Brand::from)
             .collect();
-    
+
         Ok(brands)
     }
 }
 
-    // pub(crate) async fn fetch_all(db: &Client) -> anyhow::Result<Vec<Self>> {
-    //     fetch_all!(
-    //         db,
-    //         brand,
-    //         (brand::Column::Name, sea_orm::query::Order::Asc)
-    //     )
-    // }
+// pub(crate) async fn fetch_all(db: &Client) -> anyhow::Result<Vec<Self>> {
+//     fetch_all!(
+//         db,
+//         brand,
+//         (brand::Column::Name, sea_orm::query::Order::Asc)
+//     )
+// }
 
 impl From<brand::Model> for Brand {
     fn from(model: brand::Model) -> Self {

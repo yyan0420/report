@@ -6,10 +6,10 @@
 #![deny(elided_lifetimes_in_paths)]
 #![warn(clippy::all, clippy::pedantic)]
 
+mod brand;
+mod clickhouse;
 mod db;
 mod graphql;
-mod clickhouse;
-mod brand;
 
 use async_graphql::{EmptySubscription, Schema, http::GraphiQLSource};
 use async_graphql_axum::GraphQL;
@@ -19,7 +19,7 @@ use axum::{
     response::{self, Html},
     routing::get,
 };
-use graphql::{QueryRoot, Mutation};
+use graphql::{Mutation, QueryRoot};
 use tokio::net::TcpListener;
 use tower::ServiceBuilder;
 use tower_http::cors::{Any, CorsLayer};

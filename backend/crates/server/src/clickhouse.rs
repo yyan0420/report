@@ -1,9 +1,7 @@
 use anyhow::Context;
-use clickhouse::{query::Query, Client, Row};
+use clickhouse::{Client, Row, query::Query};
 use percent_encoding::percent_decode_str;
-use sea_query::{
-    query::SelectStatement,
-};
+use sea_query::query::SelectStatement;
 use serde::Deserialize;
 
 pub(crate) struct QueryBuilder {

@@ -1,9 +1,12 @@
-use async_graphql::{Context, Object, OutputType, types::{
-    ID,
-    connection::{self, Connection, Edge},
-}};
-use crate::brand::Brand;
 use super::GlobalID;
+use crate::brand::Brand;
+use async_graphql::{
+    Context, Object, OutputType,
+    types::{
+        ID,
+        connection::{self, Connection, Edge},
+    },
+};
 use clickhouse::Client;
 
 pub(crate) struct QueryRoot;
@@ -99,9 +102,7 @@ impl QueryRoot {
             first,
             last,
             count,
-            async |db, _limit, _offset| {
-                Brand::fetch_all(db).await
-            },
+            async |db, _limit, _offset| Brand::fetch_all(db).await,
         )
         .await
     }

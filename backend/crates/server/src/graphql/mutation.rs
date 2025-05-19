@@ -21,10 +21,7 @@ pub(crate) struct Mutation;
 
 #[Object]
 impl Mutation {
-    async fn update_planogram(
-        &self,
-        _ctx: &Context<'_>,
-    ) -> Result<Planogram> {
+    async fn update_planogram(&self, _ctx: &Context<'_>) -> Result<Planogram> {
         Ok(Planogram {
             id: 42,
             name: "Dummy Planogram".to_string(),
