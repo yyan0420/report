@@ -24,8 +24,7 @@ use tokio::net::TcpListener;
 use tower::ServiceBuilder;
 use tower_http::cors::{Any, CorsLayer};
 
-use crate::db::db_connect;
-use crate::clickhouse::{client, QueryBuilder};
+use crate::clickhouse::client;
 
 #[axum::debug_handler]
 async fn graphiql() -> Result<Html<String>, &'static str> {

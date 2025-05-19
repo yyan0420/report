@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { graphql, useLazyLoadQuery } from 'react-relay';
 
 const BrandList: React.FC = () => {

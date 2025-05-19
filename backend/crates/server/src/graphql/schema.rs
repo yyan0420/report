@@ -1,23 +1,10 @@
-use async_graphql::{SimpleObject, Context, Object, Result, Error, OutputType, types::{
+use async_graphql::{Context, Object, OutputType, types::{
     ID,
     connection::{self, Connection, Edge},
 }};
-use entity::brand;
 use crate::brand::Brand;
-use sea_orm::DbConn;
 use super::GlobalID;
-use crate::clickhouse::{client, QueryBuilder};
-use clickhouse::{query::Query, Client, Row};
-
-
-// #[derive(SimpleObject)]
-// pub struct Brand {
-//     pub id: i64,
-//     pub name: String,
-//     pub url_slug: String,
-//     pub private_label: bool,
-//     pub status: bool,
-// }
+use clickhouse::Client;
 
 pub(crate) struct QueryRoot;
 

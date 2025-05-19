@@ -1,11 +1,4 @@
-use async_graphql::{Context, Object, Result, types::ID};
-// use entity::{category, planogram};
-use sea_orm::{DbConn, EntityTrait};
-
-// use crate::{
-//     category::{Category, CategoryInput}, graphql::to_local_id, planogram::{Planogram, PlanogramInput}
-// };
-
+use async_graphql::{Context, Object, Result};
 #[derive(Debug, Clone)]
 pub struct Planogram {
     pub id: i32,

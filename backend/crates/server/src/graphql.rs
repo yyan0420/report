@@ -52,9 +52,9 @@ impl GlobalID {
         Self(URL_SAFE_NO_PAD.encode(format!("{type_name}:{id}")))
     }
 
-    pub(crate) fn to_local_id(&self) -> anyhow::Result<i64> {
-        to_local_id(&self.0)
-    }
+    // pub(crate) fn to_local_id(&self) -> anyhow::Result<i64> {
+    //     to_local_id(&self.0)
+    // }
 }
 
 impl From<GlobalID> for ID {
@@ -137,60 +137,60 @@ pub(crate) fn offset_and_limit_for_query(args: &ConnectionArgs) -> anyhow::Resul
     }
 }
 
-/// A helper macro to make fetching entities easier without too much boilerplate
-macro_rules! fetch_all {
-    ($db:expr, $e: path, ($order_by: expr, $dir: expr)) => {{
-        use itertools::Itertools;
-        use sea_orm::{EntityTrait, QueryOrder};
-        use $e as E;
+// A helper macro to make fetching entities easier without too much boilerplate
+// macro_rules! fetch_all {
+//     ($db:expr, $e: path, ($order_by: expr, $dir: expr)) => {{
+//         use itertools::Itertools;
+//         use sea_orm::{EntityTrait, QueryOrder};
+//         use $e as E;
 
-        let entities = E::Entity::find().order_by($order_by, $dir);
+//         let entities = E::Entity::find().order_by($order_by, $dir);
 
-        // println!("{}", sea_orm::debug_query!(&entities, $db));
+//         // println!("{}", sea_orm::debug_query!(&entities, $db));
 
-        let entities = entities
-            .all($db)
-            .await?
-            .into_iter()
-            .map(|model| model.try_into())
-            .try_collect()?;
+//         let entities = entities
+//             .all($db)
+//             .await?
+//             .into_iter()
+//             .map(|model| model.try_into())
+//             .try_collect()?;
 
-        Ok(entities)
-    }};
+//         Ok(entities)
+//     }};
 
-    ($db:expr, $e: path, $offset:expr, $limit:expr) => {{
-        use $e as E;
+//     ($db:expr, $e: path, $offset:expr, $limit:expr) => {{
+//         use $e as E;
 
-        fetch_all!(
-            $db,
-            E,
-            (E::Column::Id, sea_orm::query::Order::Asc),
-            $limit,
-            $offset
-        )
-    }};
+//         fetch_all!(
+//             $db,
+//             E,
+//             (E::Column::Id, sea_orm::query::Order::Asc),
+//             $limit,
+//             $offset
+//         )
+//     }};
 
-    ($db:expr, $e: path, ($order_by: expr, $dir: expr), $limit:expr, $offset:expr) => {{
-        use itertools::Itertools;
-        use sea_orm::{EntityTrait, QueryOrder, QuerySelect};
-        use $e as E;
+//     ($db:expr, $e: path, ($order_by: expr, $dir: expr), $limit:expr, $offset:expr) => {{
+//         use itertools::Itertools;
+//         use sea_orm::{EntityTrait, QueryOrder, QuerySelect};
+//         use $e as E;
 
-        let entities = E::Entity::find()
-            .order_by($order_by, $dir)
-            .offset($offset)
-            .limit($limit);
+//         let entities = E::Entity::find()
+//             .order_by($order_by, $dir)
+//             .offset($offset)
+//             .limit($limit);
 
-        // println!("{}", sea_orm::debug_query!(&entities, $db));
+//         // println!("{}", sea_orm::debug_query!(&entities, $db));
 
-        let entities = entities
-            .all($db)
-            .await?
-            .into_iter()
-            .map(|model| model.try_into())
-            .try_collect()?;
+//         let entities = entities
+//             .all($db)
+//             .await?
+//             .into_iter()
+//             .map(|model| model.try_into())
+//             .try_collect()?;
 
-        Ok(entities)
-    }};
-}
+//         Ok(entities)
+//     }};
+// }
 
-pub(crate) use fetch_all;
+// pub(crate) use fetch_all;

@@ -1,11 +1,10 @@
 use crate::clickhouse::{client, QueryBuilder};
-use async_graphql::{SimpleObject, Context, ID, Object, Error, OutputType};
+use async_graphql::{SimpleObject, ID, OutputType};
 use entity::brand;
 use sea_query::Order;
-use sea_orm::DbConn;
 use serde::{Deserialize, Serialize};
 use tracing::debug;
-use crate::graphql::{GlobalID, fetch_all};
+use crate::graphql::GlobalID;
 use clickhouse::Client;
 use anyhow::Result;
 
