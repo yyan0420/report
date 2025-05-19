@@ -1,0 +1,84 @@
+
+type Brand {
+	id: ID!
+	name: String!
+	urlSlug: String!
+	privateLabel: Boolean!
+	status: Boolean!
+}
+
+type BrandConnection {
+	"""
+	Information to aid in pagination.
+	"""
+	pageInfo: PageInfo!
+	"""
+	A list of edges.
+	"""
+	edges: [BrandEdge!]!
+	"""
+	A list of nodes.
+	"""
+	nodes: [Brand!]!
+}
+
+"""
+An edge in a connection.
+"""
+type BrandEdge {
+	"""
+	The item at the end of the edge
+	"""
+	node: Brand!
+	"""
+	A cursor for use in pagination
+	"""
+	cursor: String!
+}
+
+
+
+
+type Mutation {
+	updatePlanogram: Planogram!
+}
+
+"""
+Information about pagination in a connection
+"""
+type PageInfo {
+	"""
+	When paginating backwards, are there more items?
+	"""
+	hasPreviousPage: Boolean!
+	"""
+	When paginating forwards, are there more items?
+	"""
+	hasNextPage: Boolean!
+	"""
+	When paginating backwards, the cursor to continue.
+	"""
+	startCursor: String
+	"""
+	When paginating forwards, the cursor to continue.
+	"""
+	endCursor: String
+}
+
+type Planogram {
+	id: Int!
+	name: String!
+}
+
+type QueryRoot {
+	brands(after: ID, before: ID, first: Int, last: Int, count: Int): BrandConnection!
+}
+
+
+directive @include(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+schema {
+	query: QueryRoot
+	mutation: Mutation
+}
+

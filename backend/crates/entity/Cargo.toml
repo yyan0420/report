@@ -1,0 +1,18 @@
+[package]
+name = "entity"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+async-graphql = { workspace = true }
+async-graphql-axum = { workspace = true }
+clickhouse = { workspace = true, optional = true }
+derive_more = { version = "1.0.0", features = ["deref"] }
+sea-orm = { workspace = true, features = ["json-array", "macros", "with-chrono", "with-json"] }
+serde = { workspace = true, features = ["derive"] }
+
+[features]
+server = [
+  "clickhouse",
+]
+clickhouse = ["dep:clickhouse"]
