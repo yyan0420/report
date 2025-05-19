@@ -1,4 +1,4 @@
-use crate::clickhouse::{QueryBuilder, client};
+use crate::clickhouse::QueryBuilder;
 use crate::graphql::GlobalID;
 use anyhow::Result;
 use async_graphql::{ID, OutputType, SimpleObject};
@@ -34,7 +34,7 @@ impl Brand {
             .take();
 
         let raw_rows: Vec<(i64, String, String, bool, bool)> =
-            QueryBuilder::new(&client()?, &query).fetch_all().await?;
+            QueryBuilder::new(db, &query).fetch_all().await?;
 
         let brands = raw_rows
             .into_iter()

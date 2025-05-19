@@ -62,26 +62,6 @@ where
 
 #[Object]
 impl QueryRoot {
-    // async fn brand<'a>(
-    //     &self,
-    //     _ctx: &Context<'a>
-    // ) -> Option<Result<brand::Model, async_graphql::Error>> {
-
-    //     // Return a dummy brand object wrapped in Ok
-    //     // Some(Ok(Brand {
-    //     //     id: 1,
-    //     //     name: "Dummy Brand".to_string(),
-    //     //     url_slug: "dummy-brand".to_string(),
-    //     //     private_label: false,
-    //     //     status: true,
-    //     // }))
-
-    //     match Brand::fetch_all().await {
-    //         Ok(mut models) => models.pop().map(Ok), // Take the first brand
-    //         Err(e) => Some(Err(async_graphql::Error::new(e.to_string()))),
-    //     }
-    // }
-
     async fn brands(
         &self,
         ctx: &Context<'_>,

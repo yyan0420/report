@@ -8,7 +8,6 @@
 
 mod brand;
 mod clickhouse;
-mod db;
 mod graphql;
 
 use async_graphql::{EmptySubscription, Schema, http::GraphiQLSource};
@@ -30,10 +29,9 @@ use crate::clickhouse::client;
 async fn graphiql() -> Result<Html<String>, &'static str> {
     // how ugly
     let endpoint = url::Url::parse(
-        &std::env::var("NEXT_PUBLIC_GRAPHQL_ENDPOINT")
-            .map_err(|_| "NEXT_PUBLIC_GRAPHQL_ENDPOINT not set")?,
+        &std::env::var("PUBLIC_GRAPHQL_ENDPOINT").map_err(|_| "PUBLIC_GRAPHQL_ENDPOINT not set")?,
     )
-    .map_err(|_| "cannot parse NEXT_PUBLIC_GRAPHQL_ENDPOINT")?;
+    .map_err(|_| "cannot parse PUBLIC_GRAPHQL_ENDPOINT")?;
 
     let path = endpoint.path();
 
@@ -56,7 +54,7 @@ pub fn export() {
 pub async fn run() -> anyhow::Result<()> {
     dotenvy::dotenv()?;
 
-    let endpoint = url::Url::parse(&std::env::var("NEXT_PUBLIC_GRAPHQL_ENDPOINT")?)?;
+    let endpoint = url::Url::parse(&std::env::var("PUBLIC_GRAPHQL_ENDPOINT")?)?;
 
     let host = endpoint.host_str().unwrap_or("localhost");
     let path = endpoint.path();
