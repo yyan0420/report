@@ -3,7 +3,7 @@ import { Tabs, message } from 'antd';
 
 const { TabPane } = Tabs;
 
-const TabsMenu = () => {
+const Reports = () => {
   // State to track the active tab
   const [activeTab, setActiveTab] = useState<string>('1');
 
@@ -45,4 +45,4 @@ const TabsMenu = () => {
   );
 };
 
-export default TabsMenu;
+export default Reports;

@@ -1,8 +1,9 @@
 import React from 'react';
 import { graphql, useLazyLoadQuery } from 'react-relay';
+import { type BrandListQuery } from '../__generated__/BrandListQuery.graphql';
 
 const BrandList: React.FC = () => {
-  const data = useLazyLoadQuery(
+  const data = useLazyLoadQuery<BrandListQuery>(
     graphql`
       query BrandListQuery {
         brands(first: 1000) {
