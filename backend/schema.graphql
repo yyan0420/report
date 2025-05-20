@@ -72,8 +72,28 @@ type Planogram {
 
 type QueryRoot {
 	brands(after: ID, before: ID, first: Int, last: Int, count: Int): BrandConnection!
+	test: [TestResult!]!
 }
 
+
+type TestResult {
+	name: String!
+	code: String
+	qty1: Int!
+	total1: Float!
+	qty2: Int!
+	total2: Float!
+	qty3: Int!
+	total3: Float!
+	qty4: Int!
+	total4: Float!
+	percentage1: Float
+	percentage2: Float
+	percentage3: Float
+	totalDiff1: Float!
+	totalDiff2: Float!
+	totalDiff3: Float!
+}
 
 directive @include(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
 directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT

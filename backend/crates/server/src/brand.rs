@@ -1,4 +1,4 @@
-use crate::clickhouse::QueryBuilder;
+use crate::database::clickhouse::QueryBuilder;
 use crate::graphql::GlobalID;
 use anyhow::Result;
 use async_graphql::{ID, OutputType, SimpleObject};
@@ -51,14 +51,6 @@ impl Brand {
         Ok(brands)
     }
 }
-
-// pub(crate) async fn fetch_all(db: &Client) -> anyhow::Result<Vec<Self>> {
-//     fetch_all!(
-//         db,
-//         brand,
-//         (brand::Column::Name, sea_orm::query::Order::Asc)
-//     )
-// }
 
 impl From<brand::Model> for Brand {
     fn from(model: brand::Model) -> Self {

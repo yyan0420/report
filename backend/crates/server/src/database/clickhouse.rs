@@ -1,7 +1,7 @@
 use anyhow::Context;
 use clickhouse::{Client, Row, query::Query};
 use percent_encoding::percent_decode_str;
-use sea_query::query::SelectStatement;
+use sea_query::{Iden, prepare::Write, query::SelectStatement};
 use serde::Deserialize;
 
 pub(crate) struct QueryBuilder {
@@ -58,4 +58,28 @@ pub(crate) fn client() -> anyhow::Result<Client> {
             url.host().context("cannot get host from url")?,
             url.port().context("cannot get port from url")?
         )))
+}
+
+pub(crate) struct ClickHouseSumIf;
+
+impl Iden for ClickHouseSumIf {
+    fn unquoted(&self, s: &mut dyn Write) {
+        write!(s, "sumIf").unwrap();
+    }
+}
+
+pub(crate) struct ClickHouseMultiIf;
+
+impl Iden for ClickHouseMultiIf {
+    fn unquoted(&self, s: &mut dyn Write) {
+        write!(s, "multiIf").unwrap();
+    }
+}
+
+pub(crate) struct ClickHouseArrayJoin;
+
+impl Iden for ClickHouseArrayJoin {
+    fn unquoted(&self, s: &mut dyn Write) {
+        write!(s, "arrayJoin").unwrap();
+    }
 }

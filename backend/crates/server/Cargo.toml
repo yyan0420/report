@@ -23,6 +23,9 @@ sea-orm = { workspace = true, features = [ "sqlx-postgres", "runtime-tokio-rustl
 sea-query = "0.32.0"
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
+serde_with = "3.9.0"
+strum = "0.26"
+strum_macros = "0.26"
 thiserror = "2.0.12"
 tokio = { workspace = true, features = ["macros", "rt", "rt-multi-thread"] }
 tower = "0.5.2"
