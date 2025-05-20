@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Tabs, message } from 'antd';
+import Brand from '../components/Brand';
 
 const { TabPane } = Tabs;
 
@@ -28,17 +29,9 @@ const Reports = () => {
   return (
     <div>
       <Tabs activeKey={activeTab} onChange={handleTabChange}>
-        <TabPane tab="Revenue" key="1">
-          <h3>Revenue Content</h3>
-          {/* Content for the Revenue tab */}
-        </TabPane>
-        <TabPane tab="Target" key="2">
-          <h3>Target Content</h3>
-          {/* Content for the Target tab */}
-        </TabPane>
-        <TabPane tab="Prediction" key="3">
-          <h3>Prediction Content</h3>
-          {/* Content for the Prediction tab */}
+        <TabPane tab="Brand" key="1">
+          <h3>Brand</h3>
+          <Brand />
         </TabPane>
       </Tabs>
     </div>

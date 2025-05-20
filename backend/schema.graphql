@@ -72,11 +72,11 @@ type Planogram {
 
 type QueryRoot {
 	brands(after: ID, before: ID, first: Int, last: Int, count: Int): BrandConnection!
-	test: [TestResult!]!
+	yoyTable: [Summary!]!
 }
 
 
-type TestResult {
+type Summary {
 	name: String!
 	code: String
 	qty1: Int!

@@ -99,7 +99,7 @@ impl QueryRoot {
         .await
     }
 
-    async fn test(&self) -> async_graphql::Result<Vec<Summary>> {
+    async fn yoy_table(&self) -> async_graphql::Result<Vec<Summary>> {
         // let client = ctx
         //     .data::<Client>()
         //     .map_err(|err| anyhow::anyhow!(err.message))?;
